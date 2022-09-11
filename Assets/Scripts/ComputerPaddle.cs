@@ -30,4 +30,13 @@ public class ComputerPaddle : Paddle
          }
       }
    }
+
+   private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Ball ball = collision.gameObject.GetComponent<Ball>();
+        if (ball != null)
+        {
+            ball.SwitchToComputerMaterial();
+        }
+    }
 }
