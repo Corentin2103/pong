@@ -8,6 +8,7 @@ public class StartFocus : MonoBehaviour
     public Rigidbody2D rightBar;
 
     public Ball ball;
+    public AudioSource startBallSound;
 
     public float speed = 0.01f;
 
@@ -57,6 +58,7 @@ public class StartFocus : MonoBehaviour
                 rightBar.transform.localScale = Vector3.zero;
 
                 ball.Launch();
+                startBallSound.Play();
             }
         }
     }

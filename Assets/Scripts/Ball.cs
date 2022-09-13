@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
     protected Rigidbody2D _rigidbody;
     private Renderer _renderer;
+    private TrailRenderer _trailRenderer;
 
     public Material DefaultMaterial;
     public Material PlayerMaterial;
     public Material ComputerMaterial;
+    public Color PlayerTrailColor;
+    public Color ComputerTrailColor;
 
     public float speed = 200.0f;
 
@@ -17,6 +18,7 @@ public class Ball : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<Renderer>();
+        _trailRenderer = GetComponent<TrailRenderer>();
     }
 
     public void Launch()
@@ -38,18 +40,24 @@ public class Ball : MonoBehaviour
     }
 
     public void Reset() {
+        _trailRenderer.Clear();
+        _trailRenderer.emitting = false; // It doesn't work :( (Neither does .enabled)
         _rigidbody.position = Vector3.zero;
         _rigidbody.velocity = Vector3.zero;
         _renderer.material = DefaultMaterial;
+        _trailRenderer.material.color = Color.white;
+        _trailRenderer.emitting = true;
     }
 
     public void SwitchToPlayerMaterial()
     {
         _renderer.material = PlayerMaterial;
+        _trailRenderer.material.color = PlayerTrailColor;
     }
 
     public void SwitchToComputerMaterial()
     {
         _renderer.material = ComputerMaterial;
+        _trailRenderer.material.color = ComputerTrailColor;
     }
 }
