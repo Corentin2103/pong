@@ -6,16 +6,58 @@ public class ScoringZone : MonoBehaviour
     public EventTrigger.TriggerEvent scoreTrigger;
     public ParticleSystem particleSystem;
     public Ball ballEffect;
+    public GameObject particule;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Ball ball = collision.gameObject.GetComponent<Ball>();
+        Vector3 pos = collision.transform.position;
+                    Debug.Log(pos.y);
+                    Debug.Log(pos.x);
+        //Debug.Log(pos.transform.position.y);
         if (ball != null)
         {
+            
+            if (pos.x > 5)
+            {
+                particule.transform.rotation = Quaternion.identity;
+                particule.transform.Rotate(0.0f, 0.0f, 180.0f);
+                if (pos.y + 1 > 4)
+                {
+                    particule.transform.position = new Vector3(0,4,transform.position.z);
+                }else if (pos.y + 1 < -4)
+                {
+                    particule.transform.position = new Vector3(0,-4,transform.position.z);
+                }
+                else
+                {
+                    particule.transform.position = new Vector3(0,pos.y+1,transform.position.z);
+                }                
+                particleSystem.Play();
+                
+            }
+            else if (pos.x < 5)
+            {
+                particule.transform.rotation = Quaternion.identity;
+                if (pos.y + 1 > 4)
+                {
+                    particule.transform.position = new Vector3(0,4,transform.position.z);
+                }else if (pos.y + 1 < -4)
+                {
+                    particule.transform.position = new Vector3(0,-4,transform.position.z);
+                }
+                else
+                {
+                    particule.transform.position = new Vector3(0,pos.y+1,transform.position.z);
+                }
+                particleSystem.Play();
+            }
+           
             ballEffect.SetRenderer(false);
-            // ContactPoint2D contactPoint = collision.GetContact(0);
             BaseEventData eventData = new BaseEventData(EventSystem.current);
             this.scoreTrigger.Invoke(eventData);
-            // particleSystem.Play();
+            
         }
+
+        
     }
 }
