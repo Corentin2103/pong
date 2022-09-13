@@ -7,13 +7,12 @@ public class ScoringZone : MonoBehaviour
     public ParticleSystem particleSystem;
     public Ball ballEffect;
     public GameObject particule;
+    // Get position of the collision and add the particules to this position, rotate when it's computer's goal
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Ball ball = collision.gameObject.GetComponent<Ball>();
         Vector3 pos = collision.transform.position;
-                    Debug.Log(pos.y);
-                    Debug.Log(pos.x);
-        //Debug.Log(pos.transform.position.y);
+                    
         if (ball != null)
         {
             

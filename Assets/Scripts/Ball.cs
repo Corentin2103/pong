@@ -42,13 +42,10 @@ public class Ball : MonoBehaviour
 
     public void Reset()
     {
-        // _trailRenderer.Clear();
-        // _trailRenderer.emitting = false; // It doesn't work :( (Neither does .enabled)
         _rigidbody.position = Vector3.zero;
         _rigidbody.velocity = Vector3.zero;
         _renderer.material = DefaultMaterial;
         _trailRenderer.material.color = Color.white;
-        // _trailRenderer.emitting = true;
         
     }
 
