@@ -6,6 +6,13 @@ public class PlayerPaddle : Paddle
 {
     public Vector2 direction { get; private set; }
 
+    private Rigidbody2D _rigidbody;
+
+    private void Start()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+    }
+
     private void Update()
     {
         if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.UpArrow)) {
@@ -19,9 +26,7 @@ public class PlayerPaddle : Paddle
 
     private void FixedUpdate()
     {
-        if (direction.sqrMagnitude != 0) {
-            GetComponent<Rigidbody2D>().AddForce(direction * speed);
-        }
+        _rigidbody.velocity = (direction * speed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

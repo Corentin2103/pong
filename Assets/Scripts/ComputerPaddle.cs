@@ -7,10 +7,12 @@ public class ComputerPaddle : Paddle
    public Rigidbody2D ball;
    private void FixedUpdate()
    {
-      if (this.ball.velocity.x > 0.0f)
+      if (this.ball.velocity.x > 0.0f) // The ball is coming toward the computer paddle
       {
          if (this.ball.position.y > this.transform.position.y)
          {
+            // We use AddForce here to prevent a "laggy" paddle, he can adjust it
+            // alot faster than the player
             rigidbody.AddForce(Vector2.up * this.speed);
          }
          else if (this.ball.position.y < this.transform.position.y)
@@ -22,11 +24,14 @@ public class ComputerPaddle : Paddle
       {
          if (this.transform.position.y > 0.0f)
          {
-            rigidbody.AddForce(Vector2.down * this.speed);
+            rigidbody.AddForce(Vector2.down * this.speed / 2);
          }
          else if (this.transform.position.y < 0.0f)
          {
-            rigidbody.AddForce(Vector2.up * this.speed);
+            rigidbody.AddForce(Vector2.up * this.speed / 2);
+         }
+         else {
+            rigidbody.velocity = Vector2.zero;
          }
       }
    }

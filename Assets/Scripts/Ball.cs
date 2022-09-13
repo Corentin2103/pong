@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody;
+    protected Rigidbody2D _rigidbody;
     private Renderer _renderer;
 
     public Material DefaultMaterial;
@@ -30,6 +30,11 @@ public class Ball : MonoBehaviour
     public void AddForce(Vector2 force)
     {
         _rigidbody.AddForce(force);
+    }
+
+    public void UpdateVelocity(Vector2 velocity)
+    {
+        _rigidbody.velocity = velocity;
     }
 
     public void Reset() {
