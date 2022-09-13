@@ -23,6 +23,7 @@ public class Ball : MonoBehaviour
 
     public void Launch()
     {
+        this.SetRenderer(true);
         float x = Random.value < 0.5f ? -1.0f : 1.0f;
         float y = Random.value < 0.5f ? Random.Range(-1.0f, -0.5f) : Random.Range(0.5f, 1.0f);
         Vector2 direction = new Vector2(x, y);
@@ -39,14 +40,16 @@ public class Ball : MonoBehaviour
         _rigidbody.velocity = velocity;
     }
 
-    public void Reset() {
-        _trailRenderer.Clear();
-        _trailRenderer.emitting = false; // It doesn't work :( (Neither does .enabled)
+    public void Reset()
+    {
+        // _trailRenderer.Clear();
+        // _trailRenderer.emitting = false; // It doesn't work :( (Neither does .enabled)
         _rigidbody.position = Vector3.zero;
         _rigidbody.velocity = Vector3.zero;
         _renderer.material = DefaultMaterial;
         _trailRenderer.material.color = Color.white;
-        _trailRenderer.emitting = true;
+        // _trailRenderer.emitting = true;
+        
     }
 
     public void SwitchToPlayerMaterial()
@@ -59,5 +62,10 @@ public class Ball : MonoBehaviour
     {
         _renderer.material = ComputerMaterial;
         _trailRenderer.material.color = ComputerTrailColor;
+    }
+
+    public void SetRenderer(bool boolean)
+    {
+        _trailRenderer.enabled = boolean;
     }
 }
